@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { to: "/inventory",  label: "Inventory",    icon: "▤",  roles: ["admin","warehouse"] },
   { to: "/shipments",  label: "Shipments",    icon: "▷",  roles: ["admin","dispatcher","warehouse"] },
   { to: "/alerts",     label: "Alerts",       icon: "⚠",  roles: ["admin","warehouse","dispatcher"] },
+  { to: "/users",      label: "Users",        icon: "👤", roles: ["admin"] },
 ];
 
 const PAGE_TITLES = {
@@ -20,6 +21,7 @@ const PAGE_TITLES = {
   "/inventory":  "Inventory",
   "/shipments":  "Shipments",
   "/alerts":     "Alerts",
+  "/users":      "User Management",
 };
 
 export default function Layout() {
@@ -60,8 +62,10 @@ export default function Layout() {
               <div className="user-name">{user?.name}</div>
               <div className="user-role">{user?.role}</div>
             </div>
-            <button className="logout-btn" onClick={logout} title="Logout">⎋</button>
           </div>
+          <button className="logout-btn" onClick={logout}>
+            <span style={{ fontSize: 13 }}>↩</span> Sign out
+          </button>
         </div>
       </aside>
 

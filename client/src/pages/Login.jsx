@@ -77,12 +77,14 @@ export default function Login() {
             <div className="form-group">
               <label className="form-label">Role</label>
               <select className="form-control" value={form.role} onChange={set("role")}>
-                <option value="admin">Admin</option>
                 <option value="farmer">Farmer</option>
                 <option value="processor">Processor</option>
                 <option value="warehouse">Warehouse</option>
                 <option value="dispatcher">Dispatcher</option>
               </select>
+              <p style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "5px" }}>
+                Admin accounts are created by your system administrator.
+              </p>
             </div>
           )}
 

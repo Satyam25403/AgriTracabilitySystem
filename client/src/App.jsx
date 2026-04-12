@@ -12,6 +12,7 @@ import Shipments from "./pages/Shipments";
 import TracePage from "./pages/TracePage";
 import Alerts from "./pages/Alerts";
 import Suppliers from "./pages/Suppliers";
+import Users from "./pages/Users";
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -36,6 +37,7 @@ export default function App() {
               <Route path="inventory"  element={<Inventory />} />
               <Route path="shipments"  element={<Shipments />} />
               <Route path="suppliers"  element={<Suppliers />} />
+              <Route path="users"      element={<Users />} />
               <Route path="alerts"     element={<Alerts />} />
             </Route>
           </Routes>
