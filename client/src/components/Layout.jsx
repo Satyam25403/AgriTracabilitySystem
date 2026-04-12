@@ -5,6 +5,7 @@ import { useSocket } from "../context/SocketContext";
 const NAV_ITEMS = [
   { to: "/dashboard",  label: "Dashboard",   icon: "⊞",  roles: ["admin","farmer","processor","warehouse","dispatcher"] },
   { to: "/batches",    label: "Batches",      icon: "⟐",  roles: ["admin","farmer","processor","warehouse","dispatcher"] },
+  { to: "/suppliers",  label: "Suppliers",    icon: "🤝", roles: ["admin","farmer"] },
   { to: "/processing", label: "Processing",   icon: "⟳",  roles: ["admin","processor"] },
   { to: "/inventory",  label: "Inventory",    icon: "▤",  roles: ["admin","warehouse"] },
   { to: "/shipments",  label: "Shipments",    icon: "▷",  roles: ["admin","dispatcher","warehouse"] },
@@ -14,6 +15,7 @@ const NAV_ITEMS = [
 const PAGE_TITLES = {
   "/dashboard":  "Dashboard",
   "/batches":    "Batch Management",
+  "/suppliers":  "Suppliers & Farmer Groups",
   "/processing": "Processing Tracker",
   "/inventory":  "Inventory",
   "/shipments":  "Shipments",

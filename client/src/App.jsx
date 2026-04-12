@@ -11,6 +11,7 @@ import Inventory from "./pages/Inventory";
 import Shipments from "./pages/Shipments";
 import TracePage from "./pages/TracePage";
 import Alerts from "./pages/Alerts";
+import Suppliers from "./pages/Suppliers";
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -29,12 +30,13 @@ export default function App() {
             <Route path="/trace/:batchId" element={<TracePage />} />
             <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
               <Route index element={<Navigate to="/dashboard" replace />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="batches" element={<Batches />} />
+              <Route path="dashboard"  element={<Dashboard />} />
+              <Route path="batches"    element={<Batches />} />
               <Route path="processing" element={<Processing />} />
-              <Route path="inventory" element={<Inventory />} />
-              <Route path="shipments" element={<Shipments />} />
-              <Route path="alerts" element={<Alerts />} />
+              <Route path="inventory"  element={<Inventory />} />
+              <Route path="shipments"  element={<Shipments />} />
+              <Route path="suppliers"  element={<Suppliers />} />
+              <Route path="alerts"     element={<Alerts />} />
             </Route>
           </Routes>
         </BrowserRouter>

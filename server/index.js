@@ -27,7 +27,7 @@ const corsOptions = {
     // Allow requests with no origin (Postman, curl, server-to-server)
     if (!origin) return callback(null, true);
 
-    //remove trailing slash if present
+    // trailing slash can cause mismatch, so normalize it
     origin = origin.replace(/\/$/, "");
     
     // Allow any localhost port in development
@@ -67,6 +67,7 @@ app.use("/api/batches",   require("./routes/batches"));
 app.use("/api/processing",require("./routes/processing"));
 app.use("/api/inventory", require("./routes/inventory"));
 app.use("/api/shipments", require("./routes/shipments"));
+app.use("/api/suppliers", require("./routes/suppliers"));
 app.use("/api/trace",     require("./routes/trace"));      // public, no auth
 app.use("/api/dashboard", require("./routes/dashboard"));
 
