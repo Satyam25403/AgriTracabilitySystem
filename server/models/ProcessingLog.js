@@ -26,11 +26,16 @@ const processingLogSchema = new mongoose.Schema(
       trim: true,
     },
     quantityAfter: {
-      type: Number, // quantity remaining after this stage (losses happen)
+      type: Number,
     },
     location: {
       type: String,
       trim: true,
+    },
+    // Stage-specific structured data — shape depends on stage value
+    stageData: {
+      type: mongoose.Schema.Types.Mixed,
+      default: {},
     },
     timestamp: {
       type: Date,

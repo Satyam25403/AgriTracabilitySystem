@@ -40,7 +40,7 @@ const batchSchema = new mongoose.Schema(
       trim: true,
     },
 
-    // ── Primary / legacy single-origin fields (kept for backward compat) ──
+    // ── Primary / legacy single-origin fields (kept for backward compatability)
     farmerName: { type: String, trim: true },
     farmLocation: { type: String, trim: true },
     harvestDate: { type: Date },

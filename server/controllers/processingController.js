@@ -20,20 +20,26 @@ exports.getLogsForBatch = async (req, res) => {
 // POST /api/processing
 exports.logStage = async (req, res) => {
   try {
-    const { batchId, stage, notes, quantityAfter, location } = req.body;
+    const { batchId, stage, notes, quantityAfter, location, stageData } = req.body;
     if (!batchId || !stage) return res.status(400).json({ success: false, message: "batchId and stage are required." });
 
     const batch = await Batch.findById(batchId);
     if (!batch) return res.status(404).json({ success: false, message: "Batch not found." });
 
+    // For shipped/delivered stages, derive location from stageData if not explicitly set
+    const resolvedLocation = location ||
+      (stageData?.destination) ||
+      (stageData?.warehouseName ? `${stageData.warehouseName}${stageData.warehouseCity ? ', ' + stageData.warehouseCity : ''}` : undefined);
+
     const log = await ProcessingLog.create({
       batchId,
       stage,
       operatorName: req.user.name,
-      operatorId: req.user._id,
+      operatorId:   req.user._id,
       notes,
       quantityAfter,
-      location,
+      location: resolvedLocation,
+      stageData: stageData || {},
     });
 
     batch.currentStatus = stage;
@@ -42,10 +48,10 @@ exports.logStage = async (req, res) => {
 
     const io = req.app.get("io");
     io.emit("batch_status_updated", {
-      batchId: batch.batchId,
+      batchId:   batch.batchId,
       newStatus: stage,
       updatedBy: req.user.name,
-      location,
+      location:  resolvedLocation,
       timestamp: log.timestamp,
     });
 
