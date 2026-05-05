@@ -22,6 +22,7 @@ export default function Shipments() {
 
   const set = (k) => (e) => setForm(f => ({ ...f, [k]: e.target.value }));
 
+  // Fetch shipments and batches, with optional status filter, and set up socket listeners for real-time updates
   const fetch = async () => {
     setLoading(true);
     try {
@@ -44,6 +45,7 @@ export default function Shipments() {
     }
   }, [socket]);
 
+  // Handler for creating a new shipment, with form validation and API call
   const submit = async () => {
     if (!form.batchId || !form.destination || !form.dispatchDate || !form.expectedDelivery || !form.quantityShipped)
       return toast.error("Fill all required fields");
@@ -58,6 +60,7 @@ export default function Shipments() {
     finally { setSaving(false); }
   };
 
+  // Handler for updating shipment status with an optional note, making an API call to update and then refreshing the data
   const updateStatus = async (id) => {
     if (!statusNote.status) return toast.error("Select a status");
     setSaving(true);
@@ -74,6 +77,7 @@ export default function Shipments() {
   const isOverdue = (s) => new Date(s.expectedDelivery) < new Date() && !["delivered","cancelled"].includes(s.deliveryStatus);
 
   return (
+    // Main page layout for managing shipments, including header, search/filter bar, and table of shipments with modals for creating and updating shipments
     <div className="page">
       <div className="page-header">
         <div>
@@ -92,6 +96,7 @@ export default function Shipments() {
         </select>
       </div>
 
+{/* // Shipment Table with conditional rendering for loading state, empty state, and list of shipments, including details and status badges */}
       <div className="card">
         {loading ? <div className="loading-screen" style={{ minHeight: 200 }}><div className="spinner" /></div>
         : shipments.length === 0 ? (

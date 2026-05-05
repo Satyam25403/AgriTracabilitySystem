@@ -27,6 +27,7 @@ export default function App() {
         <BrowserRouter>
           <Toaster position="top-right" toastOptions={{ style: { borderRadius: "8px", background: "#1a2e1a", color: "#e8f5e9" } }} />
           <Routes>
+            {/* // Public routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/trace/:batchId" element={<TracePage />} />
             <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>

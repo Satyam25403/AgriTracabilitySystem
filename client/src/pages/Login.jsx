@@ -12,6 +12,8 @@ export default function Login() {
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
+
+  // Handler for submitting login or registration form based on current mode
   const submit = async () => {
     setLoading(true);
     try {

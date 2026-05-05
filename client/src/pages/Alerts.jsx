@@ -9,6 +9,7 @@ export default function Alerts() {
   const [liveAlerts, setLiveAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch persisted alerts from the server and set up socket listeners for live alerts
   const fetch = async () => {
     try {
       const res = await api.get("/dashboard/alerts");
@@ -17,6 +18,7 @@ export default function Alerts() {
     finally { setLoading(false); }
   };
 
+  // On component mount, fetch alerts and set up socket listeners for live updates
   useEffect(() => {
     fetch();
     if (socket) {
@@ -27,6 +29,7 @@ export default function Alerts() {
   }, [socket]);
 
   return (
+    // Page container with header and refresh button
     <div className="page">
       <div className="page-header">
         <div>

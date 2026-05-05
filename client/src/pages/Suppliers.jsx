@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import StatusBadge from "../components/StatusBadge";
 import toast from "react-hot-toast";
 
+// Static lists for dropdowns and filters
 const COUNTRIES = ["India","Vietnam","Sri Lanka","Brazil","China","Mexico","Spain","Indonesia","Thailand","Other"];
 const CERTIFICATIONS = ["ISO 22000","HACCP","BRC","FDA (FSMA)","FSSAI","GAP","SMETA","SEDEX","Organic","Fairtrade"];
 const COMMODITIES = ["Chilli","Black Pepper","Turmeric","Paprika","Ginger","Cumin","Coriander","Cardamom","Himalayan Salt","Cotton","Rice","Wheat","Maize","Soybean","Other"];
@@ -14,6 +15,7 @@ const emptyForm = {
   certifications: [], commodities: [], farmerCount: "", notes: "",
 };
 
+// Badge component to display supplier verification status with different colors and labels based on status
 function VerificationBadge({ status }) {
   const map = {
     verified:  { bg: "#e8f5e8", color: "#1e5a1e", border: "#b8d8b8", label: "Verified" },
@@ -63,6 +65,8 @@ export default function Suppliers() {
       : [...f.commodities, c],
   }));
 
+
+  // Fetch suppliers and stats from the API with optional filters, and handle loading state and errors
   const fetchSuppliers = async () => {
     setLoading(true);
     try {
@@ -83,6 +87,8 @@ export default function Suppliers() {
 
   useEffect(() => { fetchSuppliers(); }, [search, countryFilter, statusFilter]);
 
+
+  // Handlers for opening modals: openCreate resets the form and opens the modal for creating a new supplier, while openEdit populates the form with existing supplier data for editing. openDetail fetches related batch data and shows the detail modal.
   const openCreate = () => { setForm(emptyForm); setEditTarget(null); setShowModal(true); };
   const openEdit   = (s) => {
     setForm({
@@ -106,6 +112,8 @@ export default function Suppliers() {
     } catch { setDetailBatches([]); }
   };
 
+
+  // Handler for submitting the create/edit form, which validates required fields, constructs the payload, and makes an API call to either create a new supplier or update an existing one based on whether editTarget is set. It also handles loading state and shows success/error toasts.
   const submit = async () => {
     if (!form.name || !form.country) return toast.error("Name and country are required");
     setSaving(true);

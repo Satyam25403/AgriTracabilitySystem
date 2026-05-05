@@ -33,6 +33,7 @@ export default function BatchTable({
   }
 
   return (
+    // Table wrapper with horizontal scroll for small screens
     <div className="table-wrap">
       <table>
         <thead>

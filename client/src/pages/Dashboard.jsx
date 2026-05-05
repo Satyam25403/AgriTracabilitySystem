@@ -16,6 +16,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const { socket } = useSocket();
 
+  // Fetch all dashboard data in parallel
   const fetchAll = async () => {
     try {
       const [s, sb, cb, a, al] = await Promise.all([
@@ -37,6 +38,7 @@ export default function Dashboard() {
     }
   };
 
+  // Initial fetch + setup socket listeners for real-time updates
   useEffect(() => {
     fetchAll();
     if (socket) {
@@ -90,6 +92,8 @@ export default function Dashboard() {
           ) : <div className="empty-state"><p>No batch data yet</p></div>}
         </div>
 
+
+        {/* // Commodity Mix Pie Chart */}
         <div className="card">
           <h3 style={{ fontFamily: "var(--font-mono)", fontSize: "13px", color: "var(--text-secondary)", marginBottom: "20px" }}>
             COMMODITY MIX
@@ -125,6 +129,7 @@ export default function Dashboard() {
           )}
         </div>
 
+        {/* // Recent Activity Feed */}
         <div className="card">
           <h3 style={{ fontFamily: "var(--font-mono)", fontSize: "13px", color: "var(--text-secondary)", marginBottom: "16px" }}>
             RECENT ACTIVITY

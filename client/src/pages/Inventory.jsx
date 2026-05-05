@@ -20,6 +20,7 @@ export default function Inventory() {
 
   const set = (k) => (e) => setForm(f => ({ ...f, [k]: e.target.value }));
 
+  // Fetch inventory and warehoused batches
   const fetch = async () => {
     setLoading(true);
     try {
@@ -38,6 +39,8 @@ export default function Inventory() {
     if (socket) { socket.on("inventory_updated", fetch); return () => socket.off("inventory_updated", fetch); }
   }, [socket]);
 
+
+  // Handlers for creating inventory records and adjusting stock
   const submit = async () => {
     if (!form.batchId || !form.warehouseLocation || !form.availableStock) return toast.error("Fill required fields");
     setSaving(true);
@@ -50,6 +53,7 @@ export default function Inventory() {
     finally { setSaving(false); }
   };
 
+  // Handler for adjusting stock levels with reason
   const submitAdjust = async () => {
     if (!adjust.adjustment) return toast.error("Enter adjustment amount");
     setSaving(true);
@@ -71,6 +75,7 @@ export default function Inventory() {
   };
 
   return (
+    // Inventory Management Page
     <div className="page">
       <div className="page-header">
         <div>
@@ -87,6 +92,7 @@ export default function Inventory() {
         </div>
       </div>
 
+      {/* // Inventory Table */}
       <div className="card">
         {loading ? (
           <div className="loading-screen" style={{ minHeight: 200 }}><div className="spinner" /></div>

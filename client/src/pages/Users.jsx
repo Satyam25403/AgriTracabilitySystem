@@ -38,6 +38,8 @@ export default function Users() {
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
+
+  // Fetch users from the API and update state, showing a loading spinner while fetching and handling errors with a toast notification
   const fetchUsers = async () => {
     setLoading(true);
     try {
@@ -52,6 +54,8 @@ export default function Users() {
 
   useEffect(() => { fetchUsers(); }, []);
 
+
+  // Handler for creating a new user, which validates the form, makes an API call to create the user, and then refreshes the user list. It also handles loading state and shows success/error toasts.
   const createUser = async () => {
     if (!form.name || !form.email || !form.password || !form.role) {
       return toast.error("All fields are required");

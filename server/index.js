@@ -62,8 +62,8 @@ app.use(express.json({ limit: "10mb" })); // 10mb for QR code base64
 app.use(express.urlencoded({ extended: true }));
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
-app.use("/api/auth",      require("./routes/auth"));
-app.use("/api/batches",   require("./routes/batches"));
+app.use("/api/auth",      require("./routes/auth"));            //login/signup
+app.use("/api/batches",   require("./routes/batches"));           
 app.use("/api/processing",require("./routes/processing"));
 app.use("/api/inventory", require("./routes/inventory"));
 app.use("/api/shipments", require("./routes/shipments"));

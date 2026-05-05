@@ -10,6 +10,7 @@
  */
 export default function StatsCard({ label, value, icon, color = "green", subtitle }) {
   return (
+    // Card container with colored left border based on the "color" prop
     <div className={`stat-card ${color !== "green" ? color : ""}`}>
       <div className="stat-label">{label}</div>
       <div className="stat-value">{value ?? 0}</div>

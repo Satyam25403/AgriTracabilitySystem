@@ -40,6 +40,7 @@ export default function Layout() {
           <span>Commodity Traceability</span>
         </div>
 
+        {/* // Navigation links (only show items allowed for the user's role) */}
         <nav className="sidebar-nav">
           {visibleNav.map((item) => (
             <NavLink
@@ -53,6 +54,7 @@ export default function Layout() {
           ))}
         </nav>
 
+        {/* User info and logout at the bottom of the sidebar */}
         <div className="sidebar-footer">
           <div className="user-pill">
             <div className="user-avatar">
@@ -69,6 +71,7 @@ export default function Layout() {
         </div>
       </aside>
 
+      {/* // Main content area with topbar and outlet for nested routes */}
       <div className="main-content">
         <header className="topbar">
           <div className="topbar-title">

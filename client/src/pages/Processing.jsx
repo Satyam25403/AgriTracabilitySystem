@@ -104,6 +104,7 @@ function StageDetail({ log }) {
   };
 
   switch (log.stage) {
+    // For each stage, we display a set of key details in the timeline entry
     case "cleaning":
       push("Facility",          d.facilityName && d.facilityCity ? `${d.facilityName}, ${d.facilityCity}` : d.facilityName || d.facilityCity);
       push("Method",            d.method);
@@ -155,6 +156,7 @@ function StageDetail({ log }) {
   if (!rows.length && !log.notes) return null;
 
   return (
+    // Renders the details of a specific processing stage in the timeline, showing key-value pairs and notes
     <div style={{ marginTop: 6 }}>
       {rows.length > 0 && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 20px", marginBottom: log.notes ? 6 : 0 }}>
@@ -185,6 +187,7 @@ function StageForm({ stage, stageData, onChange }) {
   if (!fields.length) return null;
 
   return (
+    // Form for entering details of a specific processing stage
     <div>
       <p style={{
         fontSize: "11px", fontWeight: 700, color: "var(--text-muted)",

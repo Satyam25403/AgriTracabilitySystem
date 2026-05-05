@@ -1,5 +1,8 @@
 import axios from "axios";
 
+
+// Create an Axios instance with a base URL and default headers, and set up interceptors to automatically attach JWT tokens to requests 
+// and handle 401 Unauthorized responses by redirecting to the login page.
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL || "/api",
   headers: { "Content-Type": "application/json" },

@@ -43,6 +43,7 @@ export default function Batches() {
     return { ...f, origins };
   });
 
+  // Toggle between single-origin and multi-origin mode, resetting fields as needed
   const toggleMultiOrigin = () => {
     setForm((f) => ({
       ...f,
@@ -51,6 +52,7 @@ export default function Batches() {
     }));
   };
 
+  // Fetch batches from the server with optional search and filters, and set up socket listeners for real-time updates
   const fetchBatches = async () => {
     setLoading(true);
     try {
@@ -69,6 +71,7 @@ export default function Batches() {
   useEffect(() => {
     api.get("/suppliers").then((r) => setSuppliers(r.data.suppliers || [])).catch(() => {});
   }, []);
+  // Set up socket listeners for real-time batch updates (new batches, status changes) and refresh the list when they occur
   useEffect(() => {
     if (socket) {
       socket.on("batch_created",        fetchBatches);
@@ -80,6 +83,8 @@ export default function Batches() {
     }
   }, [socket]);
 
+
+  // Submit the create batch form, with validation for required fields and different logic for single-origin vs multi-origin batches. On success, close the modal and refresh the batch list.
   const submit = async () => {
     if (!form.commodityType) return toast.error("Commodity type is required");
     if (!form.isMultiOrigin && (!form.farmerName || !form.farmLocation || !form.harvestDate || !form.quantity)) {
@@ -122,6 +127,8 @@ export default function Batches() {
     finally { setSaving(false); }
   };
 
+  
+  // Delete a batch by ID after confirming with the user, then refresh the batch list on success
   const deleteBatch = async (id) => {
     if (!window.confirm("Delete this batch? This cannot be undone.")) return;
     try {

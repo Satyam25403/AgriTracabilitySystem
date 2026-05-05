@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   });
   const [loading, setLoading] = useState(true);
 
+  //store token in browser
   useEffect(() => {
     const token = localStorage.getItem("agritrace_token");
     if (token) {
@@ -22,6 +23,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  //login request to backend
   const login = async (email, password) => {
     const res = await api.post("/auth/login", { email, password });
     const { token, user } = res.data;
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }) => {
     return user;
   };
 
+  //register request
   const register = async (data) => {
     const res = await api.post("/auth/register", data);
     const { token, user } = res.data;
@@ -40,6 +43,7 @@ export const AuthProvider = ({ children }) => {
     return user;
   };
 
+  //logout user
   const logout = () => {
     localStorage.removeItem("agritrace_token");
     localStorage.removeItem("agritrace_user");
@@ -49,6 +53,7 @@ export const AuthProvider = ({ children }) => {
   const can = (...roles) => user && roles.includes(user.role);
 
   return (
+    //provide user and auth functions to the app
     <AuthContext.Provider value={{ user, login, register, logout, loading, can }}>
       {children}
     </AuthContext.Provider>

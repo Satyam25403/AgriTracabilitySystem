@@ -35,6 +35,7 @@ export default function AlertBanner({ alert, live = false }) {
     >
       <span style={{ fontSize: "20px" }}>{icon}</span>
 
+      {/* Alert message */}
       <div style={{ flex: 1 }}>
         <div style={{ fontSize: "13px", color: "var(--text-primary)" }}>
           {alert.message}
