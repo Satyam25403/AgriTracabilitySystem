@@ -17,7 +17,7 @@ const server = http.createServer(app);
 const allowedOrigins = [
   process.env.CLIENT_URL,
   "http://localhost:3000",
-  "http://localhost:5000",   // React dev proxy sends requests from this origin
+  "http://localhost:5000",  
   "http://127.0.0.1:3000",
   "http://127.0.0.1:5000",
 ].filter(Boolean);

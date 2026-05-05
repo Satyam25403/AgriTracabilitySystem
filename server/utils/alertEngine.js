@@ -13,6 +13,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Simple email sending function
 const sendEmail = async ({ to, subject, html }) => {
   if (!process.env.EMAIL_USER || process.env.EMAIL_USER === "your_email@gmail.com") {
     // Skip if email not configured, just log
@@ -28,10 +29,8 @@ const sendEmail = async ({ to, subject, html }) => {
 };
 
 // ─── Alert Checks ─────────────────────────────────────────────────────────────
-
 /**
- * Check inventory after any update.
- * Emits socket events and optionally sends email.
+ * Check inventory after any update. Emits socket events and optionally sends email.
  */
 const checkInventoryAlerts = async (inventory, io, batchId) => {
   const alerts = [];

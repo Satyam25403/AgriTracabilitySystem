@@ -380,9 +380,9 @@ cd agritrace/server
 npm run dev
 # Server starts on http://localhost:5000
 # You should see:
-# ✅ MongoDB Connected: localhost
-# 🚀 AgriTrace Server running on port 5000
-# 📡 Socket.IO ready
+# MongoDB Connected: localhost
+# AgriTrace Server running on port 5000
+# Socket.IO ready
 ```
 
 **Terminal 2 — Frontend:**

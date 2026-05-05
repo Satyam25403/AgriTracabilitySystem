@@ -1,7 +1,7 @@
 const ProcessingLog = require("../models/ProcessingLog");
 const Batch = require("../models/Batch");
 
-// GET /api/processing/:batchId
+// GET /api/processing/:batchId - get processing logs for a specific batch
 exports.getLogsForBatch = async (req, res) => {
   try {
     const batch = await Batch.findById(req.params.batchId);
@@ -17,7 +17,7 @@ exports.getLogsForBatch = async (req, res) => {
   }
 };
 
-// POST /api/processing
+// POST /api/processing - log a new processing stage for a batch
 exports.logStage = async (req, res) => {
   try {
     const { batchId, stage, notes, quantityAfter, location, stageData } = req.body;

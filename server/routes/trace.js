@@ -5,7 +5,7 @@ const ProcessingLog = require("../models/ProcessingLog");
 const Inventory = require("../models/Inventory");
 const Shipment = require("../models/Shipment");
 
-// GET /api/trace/:batchId  - PUBLIC, no auth
+// GET /api/trace/:batchId  - PUBLIC, no auth required, as this is for external stakeholders to verify provenance and traceability of a batch using its unique batch ID. The batch ID is typically printed on the product packaging or label, allowing consumers, retailers, and partners to access the full history and status of the batch without needing an account or login.
 router.get("/:batchId", async (req, res) => {
   try {
     const { batchId } = req.params;

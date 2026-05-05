@@ -3,7 +3,7 @@ const Batch = require("../models/Batch");
 const Inventory = require("../models/Inventory");
 const { generateShipmentId } = require("../utils/generateShipmentId");
 
-// GET /api/shipments
+// GET /api/shipments - get all shipments with optional status filter and pagination
 exports.getAllShipments = async (req, res) => {
   try {
     const { status, page = 1, limit = 20 } = req.query;
@@ -24,7 +24,7 @@ exports.getAllShipments = async (req, res) => {
   }
 };
 
-// GET /api/shipments/:id
+// GET /api/shipments/:id - get shipment details by ID
 exports.getShipmentById = async (req, res) => {
   try {
     const shipment = await Shipment.findById(req.params.id)
@@ -37,7 +37,7 @@ exports.getShipmentById = async (req, res) => {
   }
 };
 
-// POST /api/shipments
+// POST /api/shipments - create a new shipment for a batch
 exports.createShipment = async (req, res) => {
   try {
     const {
@@ -101,7 +101,7 @@ exports.createShipment = async (req, res) => {
   }
 };
 
-// PUT /api/shipments/:id/status
+// PUT /api/shipments/:id/status - update shipment delivery status and optionally add a tracking note
 exports.updateShipmentStatus = async (req, res) => {
   try {
     const { deliveryStatus, note } = req.body;

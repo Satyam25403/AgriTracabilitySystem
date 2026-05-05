@@ -1,7 +1,7 @@
 const Supplier = require("../models/Supplier");
 const Batch = require("../models/Batch");
 
-// GET /api/suppliers
+// GET /api/suppliers - get all suppliers with optional filters and pagination
 exports.getAllSuppliers = async (req, res) => {
   try {
     const { country, status, search, type, page = 1, limit = 50 } = req.query;
@@ -31,7 +31,7 @@ exports.getAllSuppliers = async (req, res) => {
   }
 };
 
-// GET /api/suppliers/:id
+// GET /api/suppliers/:id - get supplier details by ID
 exports.getSupplierById = async (req, res) => {
   try {
     const supplier = await Supplier.findById(req.params.id)
@@ -50,7 +50,7 @@ exports.getSupplierById = async (req, res) => {
   }
 };
 
-// POST /api/suppliers
+// POST /api/suppliers - create a new supplier
 exports.createSupplier = async (req, res) => {
   try {
     const {
@@ -78,7 +78,7 @@ exports.createSupplier = async (req, res) => {
   }
 };
 
-// PUT /api/suppliers/:id
+// PUT /api/suppliers/:id - update supplier details by ID
 exports.updateSupplier = async (req, res) => {
   try {
     const allowed = [
@@ -102,7 +102,7 @@ exports.updateSupplier = async (req, res) => {
   }
 };
 
-// DELETE /api/suppliers/:id  — soft delete
+// DELETE /api/suppliers/:id  — soft delete by setting isActive to false
 exports.deleteSupplier = async (req, res) => {
   try {
     const supplier = await Supplier.findByIdAndUpdate(
@@ -117,7 +117,7 @@ exports.deleteSupplier = async (req, res) => {
   }
 };
 
-// GET /api/suppliers/:id/batches — all batches linked to this supplier
+// GET /api/suppliers/:id/batches — all batches linked to this supplier (looking at origins)
 exports.getSupplierBatches = async (req, res) => {
   try {
     const batches = await Batch.find({ "origins.supplier": req.params.id })
@@ -130,7 +130,7 @@ exports.getSupplierBatches = async (req, res) => {
   }
 };
 
-// GET /api/suppliers/stats — dashboard summary
+// GET /api/suppliers/stats — dashboard summary stats for suppliers
 exports.getSupplierStats = async (req, res) => {
   try {
     const [total, verified, byCountry, byType] = await Promise.all([

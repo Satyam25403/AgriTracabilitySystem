@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// ProcessingLog schema to track each stage of processing for a batch
 const processingLogSchema = new mongoose.Schema(
   {
     batchId: {

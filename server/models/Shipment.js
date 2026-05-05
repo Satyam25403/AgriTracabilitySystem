@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Shipment schema to track shipments of batches to customers
 const shipmentSchema = new mongoose.Schema(
   {
     shipmentId: {

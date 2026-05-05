@@ -3,7 +3,7 @@ const Inventory = require("../models/Inventory");
 const { generateBatchId } = require("../utils/generateBatchId");
 const { generateQR }      = require("../utils/generateQR");
 
-// GET /api/batches
+// GET /api/batches with optional filters: status, commodity, search, origin, pagination
 exports.getAllBatches = async (req, res) => {
   try {
     const { status, commodity, search, origin, page = 1, limit = 20 } = req.query;
@@ -39,7 +39,7 @@ exports.getAllBatches = async (req, res) => {
   }
 };
 
-// GET /api/batches/:id
+// GET /api/batches/:id - get batch details by ID
 exports.getBatchById = async (req, res) => {
   try {
     const batch = await Batch.findById(req.params.id)
@@ -52,7 +52,7 @@ exports.getBatchById = async (req, res) => {
   }
 };
 
-// POST /api/batches
+// POST /api/batches - create new batch (single-origin or multi-origin)
 exports.createBatch = async (req, res) => {
   try {
     const {
@@ -113,7 +113,7 @@ exports.createBatch = async (req, res) => {
   }
 };
 
-// PUT /api/batches/:id/status
+// PUT /api/batches/:id/status - update batch status
 exports.updateBatchStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -140,7 +140,7 @@ exports.updateBatchStatus = async (req, res) => {
   }
 };
 
-// DELETE /api/batches/:id
+// DELETE /api/batches/:id - delete batch by ID
 exports.deleteBatch = async (req, res) => {
   try {
     const batch = await Batch.findByIdAndDelete(req.params.id);

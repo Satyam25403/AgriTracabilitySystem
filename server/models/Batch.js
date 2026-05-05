@@ -26,6 +26,7 @@ const originSchema = new mongoose.Schema(
   { _id: true }
 );
 
+// Main Batch schema
 const batchSchema = new mongoose.Schema(
   {
     batchId: {

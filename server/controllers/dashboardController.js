@@ -2,6 +2,7 @@ const Batch = require("../models/Batch");
 const Inventory = require("../models/Inventory");
 const Shipment = require("../models/Shipment");
 
+// GET /api/dashboard/stats - get key metrics for dashboard
 exports.getStats = async (req, res) => {
   try {
     const [totalBatches, activeBatches, lowStockItems, pendingShipments, deliveredToday, inventoryRecords] =
@@ -25,6 +26,7 @@ exports.getStats = async (req, res) => {
   }
 };
 
+// GET /api/dashboard/status-breakdown - get batch count by status
 exports.getStatusBreakdown = async (req, res) => {
   try {
     const breakdown = await Batch.aggregate([
@@ -37,6 +39,7 @@ exports.getStatusBreakdown = async (req, res) => {
   }
 };
 
+// GET /api/dashboard/commodity-breakdown - get batch count by commodity type
 exports.getCommodityBreakdown = async (req, res) => {
   try {
     const breakdown = await Batch.aggregate([
@@ -49,6 +52,7 @@ exports.getCommodityBreakdown = async (req, res) => {
   }
 };
 
+// GET /api/dashboard/recent-activity - get recent batches and shipments
 exports.getRecentActivity = async (req, res) => {
   try {
     const [recentBatches, recentShipments] = await Promise.all([
@@ -69,6 +73,7 @@ exports.getRecentActivity = async (req, res) => {
   }
 };
 
+// GET /api/dashboard/alerts - get critical alerts for low stock, expiring batches, delayed shipments
 exports.getAlerts = async (req, res) => {
   try {
     const alerts = [];

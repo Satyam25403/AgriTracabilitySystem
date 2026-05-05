@@ -9,7 +9,7 @@ const signToken = (id) =>
     expiresIn: process.env.JWT_EXPIRES_IN || "7d",
   });
 
-// POST /api/auth/register
+// POST /api/auth/register — public registration endpoint (creates farmer role by default, or admin if it's the first user)
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -42,6 +42,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+
 // POST /api/auth/users  — admin creates any role including other admins (protected)
 router.post("/users", protect, authorize("admin"), async (req, res) => {
   try {
@@ -63,7 +64,8 @@ router.post("/users", protect, authorize("admin"), async (req, res) => {
   }
 });
 
-// POST /api/auth/login
+
+// POST /api/auth/login — public login endpoint
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -88,12 +90,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// GET /api/auth/me  (protected)
+// GET /api/auth/me  (protected) — returns current user info based on JWT token
 router.get("/me", protect, async (req, res) => {
   res.json({ success: true, user: req.user });
 });
 
-// GET /api/auth/users  (admin only)
+// GET /api/auth/users  (admin only) — list all users (for admin management)
 router.get("/users", protect, authorize("admin"), async (req, res) => {
   try {
     const users = await User.find().select("-password").sort({ createdAt: -1 });

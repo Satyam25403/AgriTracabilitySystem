@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
+// User schema to represent system users (farmers, processors, warehouse staff, etc.)
 const userSchema = new mongoose.Schema(
   {
     name: {

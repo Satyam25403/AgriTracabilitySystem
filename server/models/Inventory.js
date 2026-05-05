@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Inventory schema to track stock levels of batches in warehouses
 const inventorySchema = new mongoose.Schema(
   {
     batchId: {

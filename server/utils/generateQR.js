@@ -1,8 +1,7 @@
 const QRCode = require("qrcode");
 
 /**
- * Generates a QR code as base64 data URL
- * Points to the public trace page for a given batchId
+ * Generates a QR code as base64 data URL. Points to the public trace page for a given batchId
  */
 const generateQR = async (batchId, clientUrl) => {
   const traceUrl = `${clientUrl || process.env.CLIENT_URL || "http://localhost:3000"}/trace/${batchId}`;

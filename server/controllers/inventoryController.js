@@ -2,7 +2,7 @@ const Inventory = require("../models/Inventory");
 const Batch = require("../models/Batch");
 const { checkInventoryAlerts } = require("../utils/alertEngine");
 
-// GET /api/inventory
+// GET /api/inventory - get all inventory records with optional filters
 exports.getAllInventory = async (req, res) => {
   try {
     const { warehouse, lowStock, page = 1, limit = 20 } = req.query;
@@ -27,7 +27,7 @@ exports.getAllInventory = async (req, res) => {
   }
 };
 
-// GET /api/inventory/:batchId
+// GET /api/inventory/:batchId - get inventory record for a specific batch
 exports.getInventoryByBatch = async (req, res) => {
   try {
     const inventory = await Inventory.findOne({ batchId: req.params.batchId })
@@ -40,7 +40,7 @@ exports.getInventoryByBatch = async (req, res) => {
   }
 };
 
-// POST /api/inventory
+// POST /api/inventory - create inventory record for a batch when it arrives at warehouse
 exports.createInventory = async (req, res) => {
   try {
     const { batchId, warehouseLocation, availableStock, unit, lowStockThreshold, expiryDate } = req.body;
@@ -83,7 +83,7 @@ exports.createInventory = async (req, res) => {
   }
 };
 
-// PUT /api/inventory/:id
+// PUT /api/inventory/:id - update inventory record by ID
 exports.updateInventory = async (req, res) => {
   try {
     const { availableStock, reservedStock, warehouseLocation, lowStockThreshold, expiryDate } = req.body;
@@ -118,7 +118,7 @@ exports.updateInventory = async (req, res) => {
   }
 };
 
-// PATCH /api/inventory/:id/adjust
+// PATCH /api/inventory/:id/adjust - adjust available stock by a certain amount (positive or negative) with reason
 exports.adjustStock = async (req, res) => {
   try {
     const { adjustment, reason } = req.body;

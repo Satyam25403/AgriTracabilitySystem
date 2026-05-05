@@ -16,6 +16,7 @@ const socketHandler = (io) => {
       socket.emit("delay_check_result", { overdueCount: count });
     });
 
+    // Handle client disconnect
     socket.on("disconnect", () => {
       console.log(` Client disconnected: ${socket.id}`);
     });

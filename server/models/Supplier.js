@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+
+// Supplier schema to represent farmers, cooperatives, processors, etc. who supply commodities
 const supplierSchema = new mongoose.Schema(
   {
     name: {
